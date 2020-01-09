@@ -1,0 +1,185 @@
+---
+title: "bacsnp"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bacsnp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(VariantAnnotation)
+library(IRanges)
+library(bacsnp)
+```
+
+
+The bacsnp package is a simple tool for the analysis of single nucleotide positions in viruses from the family Baculoviridae (https://talk.ictvonline.org/ictv-reports/ictv_online_report/dsdna-viruses/w/baculoviridae). Baculoviruses have a circular-closed and double-stranded DNA genome, which are lacking the presence of introns and exons making their genome assembly and analysis fairly simple. Baculovirus species and isolates are often sequenced by whole genome sequencing techniques, e.g. Illumina, and assembled subsequently to consensus sequences, which itself is then used for the detection of single nucleotide polymorphisms (SNP)/single variant positions (SVP). The package bacsnp is intended to help analyzing the detected varialbe positions by loading them into R and processing them for later downstream analysis and visualisation.
+
+## Worklow for SNP/SNV calling
+
+Prior to running bacsnp sequencing data should be processed under the following requirements:  
+  
++ baculovirus samples were Illumina sequenced  
++ reads were mapped with BWA (including a group identifier for each data set) resulting in SAM outputs  
++ each sample was mapped against the identical reference  
++ SAM files were converted to BAM files  
++ Mpileup was called on all BAM files (exluding indels)  
++ BCF tool was used to call variant sites only  
++ BCF output file is a uncompressed VCF file
+
+For exact worklow description and full list of parameters see Wennmann et al. (2019).
+
+## Loading VCF file data
+
+The bacsnp package requires to import the VCF file by the VariantAnnotation packge using readVcf function.
+
+```{r}
+bacfile <- system.file("extdata", "bac.vcf", package="bacsnp")
+bacdata <- readVcf(bacfile, "CpGV-M")
+```
+
+The VCF file data is futher added to the package as a pre-compiled input file.
+
+```{r}
+head(bac)
+```
+
+## Transforming VCF file data
+
+For a easier presentation and analysis of the data, the VCF file is transformed to a data frame format.
+
+```{r}
+bac.df <- bacsnp.transformation(bacdata)
+
+head(bac.df)
+tail(bac.df)
+```
+
+INSERT HERE DESCRIPTION OF THE DATAFRAME!!!!
+
+
+## Accessing basic SNP information
+
+After the transformation of the VCF data into a data frame, information about the experimental setup can be assessed by standard R commands.
+
+Which isolates were analyzed?
+
+```{r}
+unique(bac.df$ISO)
+```
+
+How many unique SNP positions were detected?
+
+```{r}
+length(unique(bac.df$POS))
+```
+
+Which positions were found?
+
+```{r}
+unique(bac.df$POS)
+```
+
+### Occurring alternative nucleotides
+
+ADD INFORMATION ABOUT THE FIRST SECOND AND THIRD ALTERNATIVE
+
+```{r}
+hist(bac.df$REL.ALT1, xlim = c(0,1), breaks = 50)
+hist(bac.df$REL.ALT2, xlim = c(0,0.1), breaks = 50)
+hist(bac.df$REL.ALT3, xlim = c(0,0.01))
+```
+
+
+## Filtering SNP data frame
+
+The data frame can be filtered by three different criteria.  
+  
++ min.abs.cov = minimal absolute coverage
++ min.abs.alt = minimal absolute coverage of the alternative
++ min.rel.alt = minimal relative occurracne of alternative nucleotide
+
+```{r}
+bac.f <- bacsnp.filter(bac.df, min.abs.cov = 100, min.abs.alt = 10, min.rel.alt = 0.05)
+```
+
+
+## Determination of SNP specificity
+
+INFORMATION ON HOW SNP SPECIFICITY IS CALLED
+
+```{r}
+bac.spec <- bacsnp.specificity(bac.f, c("iIsolate1", "iIsolate2"),which.rel = "REL.ALT1")
+```
+
+The function snp_specificity provides an element of type list with two major information. First, all combinations with SNP specificity were identified. 
+
+```{r}
+bac.spec$combinations
+```
+
+Second, the data frame was modified by adding SNP specificity to every position.
+
+```{r}
+head(bac.spec$data) 
+```
+
+## Visualization of SNP frequencies with bacsnp.plot
+
+The function bacsnp.pot is based on ggplot2 can be used for visualtization of SNP positions and their frequencies. 
+
+```{r}
+Ssnp <- bac.spec$data[bac.spec$data$ISO == "iIsolate1",]
+Msnp <- bac.spec$data[bac.spec$data$ISO == "iIsolate2",]
+Mixsnp <- bac.spec$data[bac.spec$data$ISO == "iIsolate3",]
+
+Mixsnp <- Mixsnp[Mixsnp$GROUP.ID != "new",]
+
+bacsnp.plot(Ssnp, col = "SPEC", genome.length = 123858, mark.repeats = FALSE)#, mark.lowGQ = 120, mark.lowQUAL = 400)
+bacsnp.plot(Msnp, col = "SPEC", genome.length = 123858, mark.repeats = FALSE)#, mark.lowGQ = 120, mark.lowQUAL = 400)
+bacsnp.plot(Mixsnp, col = "SPEC", genome.length = 123858, mark.repeats = FALSE)#, mark.lowGQ = 120, mark.lowQUAL = 400)
+
+mplot <- bacsnp.plot(Msnp, col = "SPEC", genome.length = 123858, mark.repeats = FALSE)#, mark.lowGQ = 120, mark.lowQUAL = 400)
+splot <- bacsnp.plot(Ssnp, col = "SPEC", genome.length = 123858, mark.repeats = FALSE)#, mark.lowGQ = 120, mark.lowQUAL = 400)
+bplot <- bacsnp.plot(Mixsnp, col = "SPEC", genome.length = 123858, mark.repeats = FALSE)#, mark.lowGQ = 120, mark.lowQUAL = 400)
+
+
+```
+
+```{r}
+SPEC <- unique(bac.spec$data$SPEC)[1:3]
+
+mean.freq <- function(df, specs){
+  mean.spec <- c(rep(0,length(specs)))
+  names(mean.spec) <- specs
+  for(s in specs){
+    cdf <- df[df$SPEC == s,]
+    m <- median(cdf$REL.ALT1)
+    mean.spec[s] <- m
+  }
+  return(mean.spec)
+}
+
+Mmeans <- mean.freq(Msnp, SPEC)
+Smeans <- mean.freq(Ssnp, SPEC)
+Mixmeans <- mean.freq(Mixsnp, SPEC)
+
+print(Mmeans)
+print(Smeans)
+print(Mixmeans)
+
+```
+
+
+
+
+
+
