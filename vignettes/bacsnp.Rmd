@@ -1,5 +1,7 @@
 ---
 title: "bacsnp"
+author: "Joerg T. Wennmann"
+date: "April 2020"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{bacsnp}
@@ -35,7 +37,7 @@ Prior to running bacsnp sequencing data should be processed under the following 
 + BCF tool was used to call variant sites only  
 + BCF output file is a uncompressed VCF file
 
-For exact worklow description and full list of parameters see Wennmann et al. (2019).
+For exact worklow description and full list of parameters see Wennmann et al. (2020).
 
 ## Loading VCF file data
 

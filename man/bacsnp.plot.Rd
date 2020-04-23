@@ -30,7 +30,10 @@ A list of two elements. First element is the input dataframe with SNP
 Function to draw a SNP frequency plot. Requires ggplot2.
 }
 \examples{
+\dontrun{
 iso1 <- bac[bac$ISO == "iIsolate1",]
 bacsnp.plot(iso1, col = "SPEC")
-bacsnp.plot(x, col = "SPEC", genome.length = 125000)
+bacsnp.plot(iso1, col = "SPEC", genome.length = 125000)
+}
+
 }

@@ -12,10 +12,14 @@
 #' @return A list of two elements. First element is the input dataframe with SNP
 #'   specificities added. The second element is a counting talbe with all SNP
 #'   specificity combinations.
+#'
 #' @examples
+#' \dontrun{
 #' iso1 <- bac[bac$ISO == "iIsolate1",]
 #' bacsnp.plot(iso1, col = "SPEC")
 #' bacsnp.plot(iso1, col = "SPEC", genome.length = 125000)
+#' }
+#'
 #' @import ggplot2
 #' @export
 bacsnp.plot <- function(x, col = "SPEC",
