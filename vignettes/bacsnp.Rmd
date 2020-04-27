@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 The bacsnp package is a simple tool for the analysis of single nucleotide positions in viruses from the family Baculoviridae (https://talk.ictvonline.org/ictv-reports/ictv_online_report/dsdna-viruses/w/baculoviridae). Baculoviruses have a circular-closed and double-stranded DNA genome, which are lacking the presence of introns and exons. Baculovirus species and isolates are often sequenced by whole genome sequencing techniques, e.g. Illumina, and assembled subsequently to consensus sequences, which itself is then used for the detection of single nucleotide polymorphisms (SNP). The package bacsnp is intended to help analyzing the detected varialbe positions by loading them into R and processing them for later downstream analysis and visualisation.
 
+
 ## Worklow for SNP calling
 
 The idea behind bacsnp is the handling of multiple Illumina (short read) datasets that come from different sequenced baculovirus isolates or samples that have been mapped against a common reference sequence. By using a common reference, all SNPs found are directly related to each other and specificities can also be assigned to the individual positions. Detected SNP positions can be either isolate specific or specific for a group of isolates. Determine the specificity of SNP position is a feature of bacsnp.
