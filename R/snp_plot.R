@@ -74,6 +74,7 @@ bacsnp.plot <- function(x, col = "SPEC",
 
     theme_bw() +
     scale_x_continuous(expand = c(0.01, 0), breaks = b) +
+    scale_y_continuous(limits = c(0,1)) +
     theme(axis.text.x = element_text(angle = 45, hjust = 0.5, vjust = 0.5),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
