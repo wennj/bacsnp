@@ -45,9 +45,25 @@ library(VariantAnnotation)
 
 The packages should start without any error messages.
 
-### Installing
+### How to install bacsnp from Github
 
-To be continued.
+Next we look at how we install bacsnp directly from Github in R. This step requires the devtools package, which is available via CRAN. It must be installed and initiated.
+
+```
+library(devtools)
+```
+
+The bacsnp package is locaetd in my repository wennj/bacsnp. For its installation the you type
+
+```
+install_github("wennj/bacsnp")
+```
+
+After installation, you should be able to start it as usual to use it straight away.
+
+```
+library(bacsnp)
+```
 
 ## Running the tests
 
