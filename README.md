@@ -28,8 +28,8 @@ install.packages("devtools")
 install.packages("ggplot2")
 ```
 
-Make sure you have the latest version of Bioconductor installed. You can install it for R by following the instructions on the [Bioconductor homepage](https://www.bioconductor.org/install/).
-Then you can install the VariantAnnotation package.
+Make sure you have the latest version of **Bioconductor** installed. You can install it for R by following the instructions on the [Bioconductor homepage](https://www.bioconductor.org/install/).
+Then you can install the **VariantAnnotation** package.
 
 ```
 BiocManager::install("VariantAnnotation")
