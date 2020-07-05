@@ -53,12 +53,12 @@ Next we look at how we install bacsnp directly from Github in R. This step requi
 library(devtools)
 ```
 
-The bacsnp package is locaetd in my repository wennj/bacsnp. For its installation the you type
+The bacsnp package is locaetd in my repository wennj/bacsnp. For its installation you type
 
 ```
 install_github("wennj/bacsnp", build_vignettes = TRUE)
 ```
-
+which should install the bacsnp package along with its vignette (the packages introduction and description).
 After installation, you should be able to start it as usual to use it straight away.
 
 ```
