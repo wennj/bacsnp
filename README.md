@@ -56,7 +56,7 @@ library(devtools)
 The bacsnp package is locaetd in my repository wennj/bacsnp. For its installation the you type
 
 ```
-install_github("wennj/bacsnp")
+install_github("wennj/bacsnp", build_vignettes = TRUE)
 ```
 
 After installation, you should be able to start it as usual to use it straight away.
