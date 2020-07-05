@@ -183,14 +183,32 @@ bacsnp.transformation <- function(vcf){
       i <- i+1
     }
 
+    vcf.colnames <- colnames(vcfdf)
 
+    '%ni%' <- Negate('%in%')
+    vcfdf_char <- vcfdf[,colnames(vcfdf) %ni% all.str]
+    vcfdf_num <- vcfdf[,colnames(vcfdf) %in% all.str]
 
-    i <- 1
-    while(i!=length(all.str)+1){
-      vcfdf[,all.str[i]] <- as.numeric(levels(vcfdf[,all.str[i]])[vcfdf[,all.str[i]]])
-      #as.numeric(vcfdf[,all.str[i]])
-      i <- i+1
+    vcfdf_num[] <- lapply(vcfdf_num, function(x) {
+      if(is.character(x)) as.numeric(as.character(x)) else x
     }
+    )
+    sapply(vcfdf_num, class)
+    sapply(vcfdf_char, class)
+    sapply(cbind(vcfdf_char, vcfdf_num), class)
+
+    vcfdf <- cbind(vcfdf_char, vcfdf_num)
+
+    vcfdf <- vcfdf[,vcf.colnames]
+
+    #i <- 1
+    #while(i!=length(all.str)+1){
+    #  vcfdf[,all.str[i]] <- as.numeric(levels(vcfdf[,all.str[i]])[vcfdf[,all.str[i]]])
+    #  #as.numeric(vcfdf[,all.str[i]])
+    #  i <- i+1
+    #}
+
+
     return(vcfdf)
   }
 
