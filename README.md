@@ -47,7 +47,7 @@ The packages should start without any error messages.
 
 ### How to install bacsnp from Github
 
-Next we look at how we install bacsnp directly from Github in R. This step requires the devtools package, which is available via CRAN. It must be installed and initiated.
+Next we look at how we install bacsnp directly from Github in R. This step requires the **devtools** package, which is available via CRAN. It must be installed and initiated.
 
 ```
 library(devtools)
