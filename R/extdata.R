@@ -6,5 +6,5 @@
 #'
 #' @section bac.vcf:
 #'
-#' This data is used in vcf_to_df() function.
+#' This data is used in bacsnp.transformation() function.
 NULL
