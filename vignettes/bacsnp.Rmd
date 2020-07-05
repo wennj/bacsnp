@@ -46,8 +46,7 @@ library(bacsnp)
 
 The bacsnp package requires to import the VCF file (v4.2) by the VariantAnnotation packge using readVcf function. 
 ```{r}
-bacfile <- system.file("extdata", "bac.vcf", package="bacsnp")
-bacdata <- readVcf(bacfile)
+bacdata <- readVcf("bac.vcf")
 ```
 
 ## Transforming VCF file data
