@@ -1,4 +1,4 @@
- <img src="https://github.com/wennj/bacsnp/blob/master/vignettes/bacsnp_logo.png" width="100" height="100"> 
+ <img src="https://github.com/wennj/bacsnp/blob/master/vignettes/bacsnp_logo.png" height="100"> 
 
 # bacsnp
 
