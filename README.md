@@ -65,6 +65,16 @@ After installation, you should be able to start it as usual to use it straight a
 library(bacsnp)
 ```
 
+## Getting started
+
+In this section we will focus on how to use bacsnp. Bacsnp requires a Variant Call Format (VCF) file that was created with Mpileup for one or more sequenced isolates of a baculovirus species. The vignette of the package also offers further information, which can be opened with the following command:
+
+```
+vignette("bacsnp")
+```
+
+...
+
 ## Running the tests
 
 To be continued.
