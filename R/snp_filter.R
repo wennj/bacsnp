@@ -53,10 +53,11 @@ bacsnp.filter <- function(vcfdf, min.abs.cov = 0, min.abs.alt = 0, min.rel.alt =
     vcfdf[,COV.str] <- lapply(vcfdf[,COV.str], function(x) ifelse(x < min.abs.alt, 0,x))
   }
 
+  #moved down to its own section:
   #Filter by too low alternative frequency
-  if(min.rel.alt > 0){
-    vcfdf[,REL.str] <- lapply(vcfdf[,REL.str], function(x) ifelse(x < min.rel.alt, 0, x))
-  }
+  #if(min.rel.alt > 0){
+  #  vcfdf[,REL.str] <- lapply(vcfdf[,REL.str], function(x) ifelse(x < min.rel.alt, 0, x))
+  #}
 
   #Recalculate the total COV:
   vcfdf[,"COV"] <- as.vector(rowSums(vcfdf[,COV.str]))
@@ -70,6 +71,20 @@ bacsnp.filter <- function(vcfdf, min.abs.cov = 0, min.abs.alt = 0, min.rel.alt =
   vcfdf[,REL.str] <- vcfdf[,COV.str]/vcfdf$COV
 
   vcfdf <- rbind(vcfdf,COV.isZERO.df)
+
+  #------------------------------Filtering by REL.ALT
+
+  #Filter by too low alternative frequency
+  if(min.rel.alt > 0){
+    vcfdf[,REL.str] <- lapply(vcfdf[,REL.str], function(x) ifelse(x < min.rel.alt, 0, x))
+
+    #vcfdf[,strREL.REF] <- 1-rowSums(vcfdf[,REL.str[which(REL.str != strREL.REF)]])
+    vcfdf[,strREL.REF] <- 1-rowSums(vcfdf[,strREL.ALT])
+    #recalculate the COV values
+    vcfdf[,COV.str] <- vcfdf$COV * vcfdf[,REL.str]
+
+  }
+
 
   return(vcfdf)
 
