@@ -1,8 +1,8 @@
 Package: bacsnp
 Type: Package
 Title: Analyzing single nucleotide polymorphisms from baculovirus sequencing data
-Version: 0.1.4
-Date: 2020-11-11
+Version: 0.1.5
+Date: 2022-10-09
 Authors@R: c(person("Jörg", "Wennmann", role = c("aut", "cre"),
                      email = "bacsnp@gmail.com"),
               person("Jiangbin", "Fan", role = "aut"),
