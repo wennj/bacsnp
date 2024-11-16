@@ -11,81 +11,52 @@
 #' bacsnp.filter(bac, min.abs.cov = 100, min.abs.alt = 10, min.rel.alt = 0.05)
 #' bacsnp.filter(bac, min.rel.alt = 0.05)
 #' @export
-bacsnp.filter <- function(vcfdf, min.abs.cov = 0, min.abs.alt = 0, min.rel.alt = 0){
+bacsnp.filter <- function (vcfdf, min.abs.cov = 0, min.abs.alt = 0, min.rel.alt = 0) {
 
-  #vcfdf <- bac.df
-  #min.abs.cov = 0
-  #min.abs.alt = 0
-  #min.rel.alt = 0.05
+  min.abs.cov = 100
+  min.abs.alt = 10
+  min.rel.alt = 0.05
 
-
-  #get the number of alternatives
-  #noALT <- count(grepl("REL.ALT", colnames(vcfdf)))
   noALT <- sum(grepl("REL.ALT", colnames(vcfdf)), na.rm = TRUE)
-
-  #create a vector with all alternative coverage names:
   strCOV.REF <- "COV.REF"
   strCOV.ALT <- c()
   i <- 1
-  while(i!=noALT+1){
+  while (i != noALT + 1) {
     strCOV.ALT[i] <- paste("COV.ALT", i, sep = "")
-    i <- i+1
+    i <- i + 1
   }
   COV.str <- c(strCOV.REF, strCOV.ALT)
-
-  #create a vector with all alternative coverage names:
   strREL.REF <- "REL.REF"
   strREL.ALT <- c()
   i <- 1
-  while(i!=noALT+1){
+  while (i != noALT + 1) {
     strREL.ALT[i] <- paste("REL.ALT", i, sep = "")
-    i <- i+1
+    i <- i + 1
   }
   REL.str <- c(strREL.REF, strREL.ALT)
-
-  #Filter by absolute total coverage (COV)
-  if(min.abs.cov > 0){
-    vcfdf <- vcfdf[vcfdf$COV >= min.abs.cov,]
+  if (min.abs.cov > 0) {
+    vcfdf <- vcfdf[vcfdf$COV >= min.abs.cov, ]
   }
-
-  #Filter by too low alternative frequency
-  if(min.abs.alt > 0){
-    vcfdf[,COV.str] <- lapply(vcfdf[,COV.str], function(x) ifelse(x < min.abs.alt, 0,x))
+  if (min.abs.alt > 0) {
+    vcfdf[, COV.str] <- lapply(vcfdf[, COV.str], function(x) ifelse(x <
+                                                                      min.abs.alt, 0, x))
   }
-
-  #moved down to its own section:
-  #Filter by too low alternative frequency
-  #if(min.rel.alt > 0){
-  #  vcfdf[,REL.str] <- lapply(vcfdf[,REL.str], function(x) ifelse(x < min.rel.alt, 0, x))
-  #}
-
-  #Recalculate the total COV:
-  vcfdf[,"COV"] <- as.vector(rowSums(vcfdf[,COV.str]))
-
-  #Recalculate the relative frequencies
-  #first search for positions where COV is ZERO
-  COV.isZERO.df <- vcfdf[vcfdf$COV == 0,]
-  vcfdf <- vcfdf[vcfdf$COV != 0,]
-
-  #divide by the COV
-  vcfdf[,REL.str] <- vcfdf[,COV.str]/vcfdf$COV
-
-  vcfdf <- rbind(vcfdf,COV.isZERO.df)
-
-  #------------------------------Filtering by REL.ALT
-
-  #Filter by too low alternative frequency
-  if(min.rel.alt > 0){
-    vcfdf[,REL.str] <- lapply(vcfdf[,REL.str], function(x) ifelse(x < min.rel.alt, 0, x))
-
-    #vcfdf[,strREL.REF] <- 1-rowSums(vcfdf[,REL.str[which(REL.str != strREL.REF)]])
-    vcfdf[,strREL.REF] <- 1-rowSums(vcfdf[,strREL.ALT])
-    #recalculate the COV values
-    vcfdf[,COV.str] <- vcfdf$COV * vcfdf[,REL.str]
-
+  vcfdf[, "COV"] <- as.vector(rowSums(vcfdf[, COV.str]))
+  COV.isZERO.df <- vcfdf[vcfdf$COV == 0, ]
+  vcfdf <- vcfdf[vcfdf$COV != 0, ]
+  vcfdf[, REL.str] <- vcfdf[, COV.str]/vcfdf$COV
+  vcfdf <- rbind(vcfdf, COV.isZERO.df)
+  if (min.rel.alt > 0) {
+    vcfdf[, REL.str] <- lapply(vcfdf[, REL.str], function(x) ifelse(x <
+                                                                      min.rel.alt, 0, x))
+    if (length(strREL.ALT) == 1) {
+      # Direkt auf die Spalte zugreifen, wenn es nur eine gibt
+      vcfdf[, strREL.REF] <- 1 - vcfdf[, strREL.ALT]
+    } else {
+      # Standardfall: mehrere Spalten verwenden
+      vcfdf[, strREL.REF] <- 1 - rowSums(vcfdf[, strREL.ALT])
+    }
+    vcfdf[, COV.str] <- vcfdf$COV * vcfdf[, REL.str]
   }
-
-
   return(vcfdf)
-
 }
