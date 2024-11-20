@@ -2,12 +2,12 @@ Package: bacsnp
 Type: Package
 Title: Analyzing single nucleotide polymorphisms from baculovirus sequencing data
 Version: 0.1.6
-Date: 2022-10-09
+Date: 2024-11-20
 Authors@R: c(person("Jörg", "Wennmann", role = c("aut", "cre"),
-                     email = "bacsnp@gmail.com"),
+                     email = "joerg.wennmann@julius-kuehn.de"),
               person("Jiangbin", "Fan", role = "aut"),
               person("Sergei", "Senger", role = "ctb"))
-Maintainer: Joerg Wennmann <bacsnp@gmail.com>
+Maintainer: Joerg Wennmann <joerg.wennmann@julius-kuehn.de>
 Description: A tool for analyzing VCF files based on multipe sequenced
     baculovirus isolates mapped to a common reference sequence. Specifities of 
     single nucleotide polymorphic (SNP) sites to a certain isolate or multiple isolates
@@ -18,7 +18,7 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 4.0.3),
+    R (>= 4.4.0),
     ggplot2
 Imports:
     stats,
