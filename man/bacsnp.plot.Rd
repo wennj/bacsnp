@@ -4,8 +4,14 @@
 \alias{bacsnp.plot}
 \title{SNP frequency plot}
 \usage{
-bacsnp.plot(x, col = "SPEC", genome.length = NULL,
-  mark.repeats = NULL, mark.lowGQ = NULL, mark.lowQUAL = NULL)
+bacsnp.plot(
+  x,
+  col = "SPEC",
+  genome.length = NULL,
+  mark.repeats = NULL,
+  mark.lowGQ = NULL,
+  mark.lowQUAL = NULL
+)
 }
 \arguments{
 \item{x}{A VCF dataframe that contains the SNP data from a single isolate only.

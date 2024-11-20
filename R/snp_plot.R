@@ -80,7 +80,7 @@ bacsnp.plot <- function(x, col = "SPEC",
           panel.grid.minor = element_blank(),
           axis.line = element_line(colour = "black"),
           panel.background = element_rect(fill = "white"),
-          panel.border = element_rect(colour = "black", fill= NA, size = 1)
+          panel.border = element_rect(colour = "black", fill= NA, linewidth = 1)
           #legend.position = "right",
           #legend.title = element_text("SNP specificity")
     ) +

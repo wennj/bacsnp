@@ -9,6 +9,6 @@ This is a VCF file containing fictional VCF data.
 \section{bac.vcf}{
 
 
-This data is used in vcf_to_df() function.
+This data is used in bacsnp.transformation() function.
 }
 

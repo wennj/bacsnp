@@ -1,10 +1,8 @@
 #' Transforming a VCF file into a dataframe.
 #'
-#' @param vcf A VCF file loaded with read.vcfR of the vcfR package.
+#' @param vcf_data A VCF file loaded with read.vcfR of the vcfR package.
 #' @return A dataframe.
-#' @import vcfR
-#' @importFrom IRanges CharacterList
-#' @importFrom S4Vectors unstrsplit
+#' @importFrom stringr str_split
 #' @export
 bacsnp.transformation <- function(vcf_data){
 
@@ -39,6 +37,9 @@ bacsnp.transformation <- function(vcf_data){
     genotype_info <- split_genotype_info(genotype_info)
 
     vcf_info <- cbind(fixed_info, genotype_info)
+
+    # Voranstellen von "i" an jedes Element in der ISO-Spalte
+    vcf_info$ISO <- paste0("i", vcf_info$ISO)
 
     vcf_info$POS <- as.numeric(vcf_info$POS)
     vcf_info$COV <- as.numeric(vcf_info$DP)

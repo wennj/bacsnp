@@ -4,10 +4,10 @@
 \alias{bacsnp.transformation}
 \title{Transforming a VCF file into a dataframe.}
 \usage{
-bacsnp.transformation(vcf)
+bacsnp.transformation(vcf_data)
 }
 \arguments{
-\item{vcf}{A VCF file loaded with readVCF of the VariantAnnotation package.}
+\item{vcf_data}{A VCF file loaded with read.vcfR of the vcfR package.}
 }
 \value{
 A dataframe.

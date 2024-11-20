@@ -4,8 +4,7 @@
 \alias{bacsnp.filter}
 \title{Filtering SNP frequency dataframe}
 \usage{
-bacsnp.filter(vcfdf, min.abs.cov = 0, min.abs.alt = 0,
-  min.rel.alt = 0)
+bacsnp.filter(vcfdf, min.abs.cov = 0, min.abs.alt = 0, min.rel.alt = 0)
 }
 \arguments{
 \item{vcfdf}{A dataframe with SNP frequencies. Data was created with vcf_transformation.}
@@ -23,8 +22,9 @@ A vcf dataframe that was filtered by a required minimal total coverage (COV), mi
 Filtering SNP frequency dataframe
 }
 \examples{
-bacsnp.filter(bac, min.abs.cov = 100)
-bacsnp.filter(bac, min.abs.cov = 100, min.abs.alt = 10)
-bacsnp.filter(bac, min.abs.cov = 100, min.abs.alt = 10, min.rel.alt = 0.05)
-bacsnp.filter(bac, min.rel.alt = 0.05)
+data(bac.df)
+bacsnp.filter(bac.df, min.abs.cov = 100)
+bacsnp.filter(bac.df, min.abs.cov = 100, min.abs.alt = 10)
+bacsnp.filter(bac.df, min.abs.cov = 100, min.abs.alt = 10, min.rel.alt = 0.05)
+bacsnp.filter(bac.df, min.rel.alt = 0.05)
 }

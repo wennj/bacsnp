@@ -20,5 +20,6 @@ A list of two elements. First element is the input dataframe with SNP specificit
 SNP specificity determination
 }
 \examples{
-bacsnp.specificity(bac, c("iIsolate1", "iIsolate2"), which.rel = "REL.ALT1")
+data(bac.f)
+bacsnp.specificity(bac.f, c("iIso1", "iIso2"), which.rel = "REL.ALT1")
 }

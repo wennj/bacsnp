@@ -5,7 +5,8 @@
 #' @param which.rel Specifies the column of relativ SNP frequencies for which the specificity determination should be performed on.
 #' @return A list of two elements. First element is the input dataframe with SNP specificities added. The second element is a counting talbe with all SNP specificity combinations.
 #' @examples
-#' bacsnp.specificity(bac, c("iIsolate1", "iIsolate2"), which.rel = "REL.ALT1")
+#' data(bac.f)
+#' bacsnp.specificity(bac.f, c("iIso1", "iIso2"), which.rel = "REL.ALT1")
 #' @importFrom stats kmeans
 #' @export
 bacsnp.specificity <- function(vcfdf, isolates, which.rel = "REL.ALT1"){
@@ -135,7 +136,8 @@ bacsnp.specificity <- function(vcfdf, isolates, which.rel = "REL.ALT1"){
 
 
   combinations <- as.data.frame(table(spec.pos.comb$SPEC))
-  combinations <- combinations[order(-combinations["Freq"]),]
+  #combinations <- combinations[order(-combinations["Freq"]),]
+  combinations <- combinations[order(-combinations$Freq), ]
 
   spec.pos.all <- spec.pos.comb
 

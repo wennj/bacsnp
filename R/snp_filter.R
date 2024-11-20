@@ -6,10 +6,11 @@
 #' @param min.rel.alt An relative value for the minimal frequency of an alternative nucleotide.
 #' @return A vcf dataframe that was filtered by a required minimal total coverage (COV), minimal coverage of alternative nucleotides (COV.ALT) or a minimal relative frequency of the first alterntative (REL.ALT1).
 #' @examples
-#' bacsnp.filter(bac, min.abs.cov = 100)
-#' bacsnp.filter(bac, min.abs.cov = 100, min.abs.alt = 10)
-#' bacsnp.filter(bac, min.abs.cov = 100, min.abs.alt = 10, min.rel.alt = 0.05)
-#' bacsnp.filter(bac, min.rel.alt = 0.05)
+#' data(bac.df)
+#' bacsnp.filter(bac.df, min.abs.cov = 100)
+#' bacsnp.filter(bac.df, min.abs.cov = 100, min.abs.alt = 10)
+#' bacsnp.filter(bac.df, min.abs.cov = 100, min.abs.alt = 10, min.rel.alt = 0.05)
+#' bacsnp.filter(bac.df, min.rel.alt = 0.05)
 #' @export
 bacsnp.filter <- function (vcfdf, min.abs.cov = 0, min.abs.alt = 0, min.rel.alt = 0) {
 
