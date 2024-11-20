@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jörg Wennmann \email{bacsnp@gmail.com}
+\strong{Maintainer}: Jörg Wennmann \email{joerg.wennmann@julius-kuehn.de}
 
 Authors:
 \itemize{
