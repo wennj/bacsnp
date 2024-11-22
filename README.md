@@ -18,29 +18,29 @@ The ***bacsnp*** tool was developed to assign specificities to SNP positions. 
 
 ------------------------------------------------------------------------
 
-## Installation 
+## Installation
 
 There are two ways to install the **bacsnp** package:
 
-1.  installation from CRAN (coming soon)
-
-    The bacsnp package is not yet available on CRAN. Once it is published, you will be able to install it directly from the R console with the following command:
-
-    ```{r}
-    install.packages("bacsnp") #comming hoepully soon
-    ```
-
-2.  Installation from GitHub (latest version)
+1.  Installation from GitHub (latest version)
 
     Until the package is available on CRAN, you can install the most recent version directly from GitHub. To do this, you need the devtools package, which can be installed as follows:
 
     ```{r}
     library(devtools)
 
-    install_github("wennj/bacsnp", build_vignettes = TRUE)
+    install_github("https://github.com/wennj/bacsnp", build_vignettes = TRUE)
     ```
 
     The build_vignettes = TRUE argument ensures that the vignette (a detailed introduction and documentation of the package) is also installed.
+
+2.  installation from CRAN (planed for future release)
+
+    The bacsnp package is not yet available on CRAN. Once it is published, you will be able to install it directly from the R console with the following command:
+
+    ```{r}
+    install.packages("bacsnp") #comming eventually soon
+    ```
 
 ------------------------------------------------------------------------
 
