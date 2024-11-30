@@ -76,8 +76,8 @@ The bioinformatic pipeline for variable SNP position determination involves only
 
 How the tools interact and process the sequencing data, can be seen from the Galaxy workflow itself. There, you will also find all required individual parameters that have been set for each tool.
 
-[Link to Galaxy workflow file.](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)
+[Link to ](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[Galaxy](assets/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[ ](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[workflow](assets/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[ file.](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)
 
 [Link to Galaxy workflow on usegalaxy.eu.](https://usegalaxy.eu/u/wennmannj/w/snp-calling-workflow-for-paired-list-imported-from-uploaded-file)
 
-![](doc/galaxy_workflow_screenshot.png)
+![](assets/galaxy_workflow_screenshot.png)
