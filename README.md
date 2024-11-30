@@ -56,6 +56,28 @@ All required dependencies, such as vcfR and ggplot2, will be automatically insta
 
 ------------------------------------------------------------------------
 
-## Example workflow
+# Example workflow
 
-Coming soon :)
+Here, I would like to show you an example of how to analyse the composition of a baculovirus isolate using previously sequenced isolates. The example workflow can be transferred to your own analysis.
+
+The core of the analysis are variable SNP positions, which act as markers and can be specific for certain isolates. To determine variable SNP positions across several sequenced isolates, mpileup and bcftools are used. The output is in variant call format (VCF), which is the required input for the bacsnp tool. To create the VCF file, sequencing data can be processed with [usegalaxy.eu](#0). A Galaxy platform is particularly suitable for beginners, people who do not have sufficient computing capacity or do not regularly perform bioinformatic analyses.
+
+## Galaxy Workflow
+
+The bioinformatic pipeline for variable SNP position determination involves only three tools:
+
+-   Trim Galore! ([Link](https://github.com/FelixKrueger/TrimGalore))
+
+-   BWA-MEM ([Link](https://github.com/galaxyproject/tools-iuc/tree/main/tools/bwa))
+
+-   mpileup ([Link](https://github.com/galaxyproject/tools-iuc/tree/main/tools/bcftools))
+
+-   bcftools ([Link](https://github.com/galaxyproject/tools-iuc/tree/main/tools/bcftools))
+
+How the tools interact and process the sequencing data, can be seen from the Galaxy workflow itself. There, you will also find all required individual parameters that have been set for each tool.
+
+[Link to Galaxy workflow file.](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)
+
+[Link to Galaxy workflow on usegalaxy.eu.](https://usegalaxy.eu/u/wennmannj/w/snp-calling-workflow-for-paired-list-imported-from-uploaded-file)
+
+![](doc/galaxy_workflow_screenshot.png)
