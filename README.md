@@ -3,6 +3,7 @@
 This repository accompanies the following publication and provides the code, data, and tools described therein:
 
 -   Wennmann, J.T., Fan, J., Jehle, J.A. (2020). Bacsnp: Using Single Nucleotide Polymorphism (SNP) Specificities and Frequencies to Identify Genotype Composition in Baculoviruses. *Viruses*, [**https://doi.org/10.3390/v12060625**](https://doi.org/10.3390/v12060625).
+-   Jörg Wennmann,  **Deciphering Virus Populations - Single Nucleotide Variants (SNVs) and Specificities in Baculovirus Isolates (Galaxy Training Materials)**. <https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/baculovirus-isolate-variation/tutorial.html> Online; accessed Thu Feb 27 2025
 
 ## Introduction
 
@@ -68,15 +69,24 @@ All required dependencies, such as vcfR and ggplot2, will be automatically insta
 
 ------------------------------------------------------------------------
 
-# Example workflow
+# Example workflow - Composition of an isolate of the Cydia pomonella granulovirus (CpGV)
 
-Here, I would like to show you an example of how to analyse the composition of a baculovirus isolate using previously sequenced isolates. The example workflow can be transferred to your own analysis.
+Here, I would like to show you an example of how to analyse the composition of a baculovirus isolate using previously sequenced isolates. The Cydia pomonella granulovirus (CpGV) will serve as an example, as many isolates of this virus have already been sequenced and are available on the NCBI Genbank and NCBI SRA.
+
+Using three CpGV isolates, we will work through the workflow step by step to decipher the composition of one isolate using the sequence data of the other three isolates. The workflow will use the following four isolates:
+
+| Isolate | NCBI Genbank | NCBI SRA | Reference |
+|------------------|------------------|------------------|------------------|
+| CpGV-M | KM217575 | [SRR31589148](https://trace.ncbi.nlm.nih.gov/Traces?run=SRR31589148) | [Wennmann et al. 2020](https://doi.org/10.3390/v12060625) |
+| CpGV-S | KM217573 | [SRR31589147](https://trace.ncbi.nlm.nih.gov/Traces?run=SRR31589147) | [Wennmann et al. 2020](https://doi.org/10.3390/v12060625) |
+| CpGV-E2 | KM217577 | [SRR31589146](https://trace.ncbi.nlm.nih.gov/Traces?run=SRR31589146) | [Gueli Alletti et al. 2017](https://doi.org/10.3390/v9090250) |
+| CpGV-V15 | not available | [SRR31679023](https://www.ncbi.nlm.nih.gov/sra/SRX27041396) | [Fan et al. 2020](https://doi.org/10.1093/ve/veaa073) |
 
 The core of the analysis are variable SNP positions, which act as markers and can be specific for certain isolates. To determine variable SNP positions across several sequenced isolates, mpileup and bcftools are used. The output is in variant call format (VCF), which is the required input for the bacsnp tool. To create the VCF file, sequencing data can be processed with [usegalaxy.eu](#0). A Galaxy platform is particularly suitable for beginners, people who do not have sufficient computing capacity or do not regularly perform bioinformatic analyses.
 
 ## Galaxy Workflow
 
-The bioinformatic pipeline for variable SNP position determination involves only three tools:
+The bioinformatic pipeline for variable SNP position determination involves only four tools:
 
 -   Trim Galore! ([Link](https://github.com/FelixKrueger/TrimGalore))
 
@@ -88,8 +98,12 @@ The bioinformatic pipeline for variable SNP position determination involves only
 
 How the tools interact and process the sequencing data, can be seen from the Galaxy workflow itself. There, you will also find all required individual parameters that have been set for each tool.
 
-[Link to](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[Galaxy](assets/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[ ](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[workflow](assets/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)[file.](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)
+[Link to Galaxy workflow file.](doc/Galaxy-Workflow-bacsnp_SNP_calling_workflow.ga)
 
 [Link to Galaxy workflow on usegalaxy.eu.](https://usegalaxy.eu/u/wennmannj/w/snp-calling-workflow-for-paired-list-imported-from-uploaded-file)
 
 ![](assets/galaxy_workflow_screenshot.png)
+
+## Running the Galaxy workflow
+
+In
